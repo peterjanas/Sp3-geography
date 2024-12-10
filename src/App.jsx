@@ -6,8 +6,10 @@ function App() {
 
   return (
     <>
-    
-    </>
+        <h1> Home </h1>
+        <p> test text 123 </p>
+        <p> Merge conflict omegalul </p>
+        </>
   )
 }
 
