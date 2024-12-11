@@ -8,7 +8,7 @@ function App() {
       
       <h1>Home</h1>
       <p>This is what its all about</p> <br />
-      <p>lormekjlgshldvklerjlk</p>
+      <p>Peter fizz</p>
     </>
   );
 }
