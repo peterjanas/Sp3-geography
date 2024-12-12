@@ -5,6 +5,9 @@ function MainLayout() {
     <div>
       <ul>
         <li>
+          <NavLink to="/">Home</NavLink>
+        </li>
+        <li>
           <NavLink to="/world">World</NavLink>
         </li>
         <li>
