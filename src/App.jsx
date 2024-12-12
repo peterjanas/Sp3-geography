@@ -1,79 +1,36 @@
-import { useState } from "react";
 import "./App.css";
-import EuropaMapTest from "./components/EuropaMapTest";
-
-
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+  Outlet,
+} from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./pages/Home";
+import World from "./pages/World";
+import Europe from "./pages/Europe";
+import Asia from "./pages/Asia";
+import Africa from "./pages/Africa";
+import NorthAmerica from "./pages/NorthAmerica";
+import SouthAmerica from "./pages/SouthAmerica";
 
 function App() {
-  const [countryData, setCountryData] = useState(null);
-
-  function clickHandler(event) {
-    const clickedElement = event.target;
-
-    if (clickedElement.tagName === "path" && clickedElement.id) {
-      const countryCode = clickedElement.id.toLowerCase();
-
-      fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCountryData(data[0]);
-        })
-        .catch((error) => {
-          console.error("Error fetching country data:", error);
-        });
-
-      const previouslyClicked = document.querySelector('path[fill="red"]');
-      if (previouslyClicked && previouslyClicked !== clickedElement) {
-        previouslyClicked.setAttribute(
-          "fill",
-          previouslyClicked.getAttribute("data-original-color")
-        );
-      }
-
-      if (!clickedElement.hasAttribute("data-original-color")) {
-        clickedElement.setAttribute(
-          "data-original-color",
-          clickedElement.getAttribute("fill")
-        );
-      }
-
-      clickedElement.setAttribute("fill", "red");
-    }
-  }
-
-  return (
-    <div>
-      <h1>Country Info</h1>
-      <div onClick={clickHandler}>
-        <EuropaMapTest />
-      </div>
-
-      {countryData && (
-        <div className="country-info">
-          <h2>{countryData.name.common}</h2>
-          <p>
-            <strong>Capital:</strong>{" "}
-            {countryData.capital ? countryData.capital[0] : "N/A"}
-          </p>
-          <p>
-            <strong>Population:</strong>{" "}
-            {countryData.population.toLocaleString()}
-          </p>
-          <p>
-            <strong>Region:</strong> {countryData.region}
-          </p>
-          <p>
-            <strong>Flag:</strong>{" "}
-            <img
-              src={countryData.flags[0]}
-              alt="flag"
-              style={{ width: "100px" }}
-            />
-          </p>
-        </div>
-      )}
-    </div>
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<Home />} />
+        <Route path="/world" element={<World />} />
+        <Route path="/europe" element={<Europe />} />
+        <Route path="/asia" element={<Asia />} />
+        <Route path="/africa" element={<Africa />} />
+        <Route path="/north-america" element={<NorthAmerica />} />
+        <Route path="/south-america" element={<SouthAmerica />} />
+      </Route>
+    )
   );
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
