@@ -8,7 +8,7 @@ function EuropaMapTest(props) {
       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
       xmlns:svg="http://www.w3.org/2000/svg"
       xmlns="http://www.w3.org/2000/svg"
-      width="10000.865"
+      width="1000.865"
       height="865.9630"
       transform="translate(50, -300)"
     >
