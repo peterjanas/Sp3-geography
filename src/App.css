@@ -1,0 +1,5 @@
+.land {
+    fill: lightblue; /* Fills the regions with a light blue color */
+    stroke: black; /* Adds a black border around the regions */
+    stroke-width: 2px; /* Sets the border width */
+}

@@ -1,78 +1,80 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import Worldmaptest from "./components/worldmaptest";
 import EuropaMapTest from "./components/EuropaMapTest";
 
-
-
 function App() {
-  const [countryData, setCountryData] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [currentCountry, setCurrentCountry] = useState(null);
+  const [quizActive, setQuizActive] = useState(false);
+  const [guessedCountries, setGuessedCountries] = useState([]);
 
-  function clickHandler(event) {
+  useEffect(() => {
+    // Fetch all European country data when the app loads
+    fetch("https://restcountries.com/v3.1/region/europe")
+      .then((response) => response.json())
+      .then((data) => {
+        const countryList = data.map((country) => ({
+          name: country.name.common,
+          cca2: country.cca2.toLowerCase(),
+        }));
+        setCountries(countryList);
+      })
+      .catch((error) => {
+        console.error("Error fetching country data:", error);
+      });
+  }, []);
+
+  // Function to draw a random country
+  const drawCountry = () => {
+    if (countries.length === 0) return;
+    const remainingCountries = countries.filter(
+      (country) => !guessedCountries.includes(country.cca2)
+    );
+    if (remainingCountries.length === 0) {
+      alert("Congratulations! You have guessed all countries.");
+      setQuizActive(false);
+      setCurrentCountry(null);
+      return;
+    }
+    const randomCountry =
+      remainingCountries[
+        Math.floor(Math.random() * remainingCountries.length)
+      ];
+    setCurrentCountry(randomCountry);
+    setQuizActive(true);
+  };
+
+  // Handle map click
+  const clickHandler = (event) => {
     const clickedElement = event.target;
 
-    if (clickedElement.tagName === "path" && clickedElement.id) {
+    if (quizActive && clickedElement.tagName === "path" && clickedElement.id) {
       const countryCode = clickedElement.id.toLowerCase();
 
-      fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setCountryData(data[0]);
-        })
-        .catch((error) => {
-          console.error("Error fetching country data:", error);
-        });
-
-      const previouslyClicked = document.querySelector('path[fill="red"]');
-      if (previouslyClicked && previouslyClicked !== clickedElement) {
-        previouslyClicked.setAttribute(
-          "fill",
-          previouslyClicked.getAttribute("data-original-color")
-        );
+      if (countryCode === currentCountry.cca2) {
+        alert(`Correct! You clicked on ${currentCountry.name}.`);
+        setGuessedCountries((prev) => [...prev, currentCountry.cca2]);
+        setQuizActive(false);
+        setCurrentCountry(null);
+        drawCountry(); // Automatically draw the next country
+      } else {
+        alert(`Wrong! Try again.`);
       }
-
-      if (!clickedElement.hasAttribute("data-original-color")) {
-        clickedElement.setAttribute(
-          "data-original-color",
-          clickedElement.getAttribute("fill")
-        );
-      }
-
-      clickedElement.setAttribute("fill", "red");
     }
-  }
+  };
 
   return (
     <div>
-      <h1>Country Info</h1>
-      <div onClick={clickHandler}>
+      <h1>Geography Quiz</h1>
+      <div style={{ position: "relative", zIndex: 10 }}>
+        <button onClick={drawCountry} disabled={quizActive}>
+          {quizActive ? "Guess the Country" : "Start Quiz"}
+        </button>
+        {currentCountry && <p>Find the country: {currentCountry.name}</p>}
+      </div>
+      <div style={{ position: "relative", zIndex: 1 }} onClick={clickHandler}>
         <EuropaMapTest />
       </div>
-
-      {countryData && (
-        <div className="country-info">
-          <h2>{countryData.name.common}</h2>
-          <p>
-            <strong>Capital:</strong>{" "}
-            {countryData.capital ? countryData.capital[0] : "N/A"}
-          </p>
-          <p>
-            <strong>Population:</strong>{" "}
-            {countryData.population.toLocaleString()}
-          </p>
-          <p>
-            <strong>Region:</strong> {countryData.region}
-          </p>
-          <p>
-            <strong>Flag:</strong>{" "}
-            <img
-              src={countryData.flags[0]}
-              alt="flag"
-              style={{ width: "100px" }}
-            />
-          </p>
-        </div>
-      )}
     </div>
   );
 }
