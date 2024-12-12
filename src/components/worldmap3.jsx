@@ -1,5 +1,5 @@
 import * as React from "react"
-function SvgComponent(props) {
+function SvgmapWorld2(props) {
   return (
     <svg
       height={299.98315789473685}
@@ -2121,4 +2121,4 @@ function SvgComponent(props) {
     </svg>
   )
 }
-export default SvgComponent
+export default SvgmapWorld2

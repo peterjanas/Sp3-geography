@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SvgComponent(props) {
+function SvgmapWorld(props) {
   return (
     <svg
       fill="#ececec"
@@ -348,4 +348,4 @@ function SvgComponent(props) {
   );
 }
 
-export default SvgComponent;
+export default SvgmapWorld;
