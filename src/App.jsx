@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import Worldmaptest from "./components/worldmaptest";
 import EuropaMapTest from "./components/EuropaMapTest";
 
 
