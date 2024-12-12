@@ -4,7 +4,11 @@ function SouthAmerica() {
   return (
     <div>
       <h1>South America</h1>
-      <QuizOverview />
+      <QuizOverview
+      continent="South America"
+      capitalPath="/south-america-capital-quiz"
+      countryPath="/south-america-country-quiz"
+      flagPath="/south-america-flag-quiz" />
     </div>
   );
 }
