@@ -14,6 +14,10 @@ import Asia from "./pages/Asia";
 import Africa from "./pages/Africa";
 import NorthAmerica from "./pages/NorthAmerica";
 import SouthAmerica from "./pages/SouthAmerica";
+import WorldCapitals from "./pages/world-quiz-pages/WorldCapitals";
+import WorldCountries from "./pages/world-quiz-pages/WorldCountries";
+import WorldFlags from "./pages/world-quiz-pages/WorldFlags";
+
 
 function App() {
   const router = createBrowserRouter(
@@ -26,6 +30,12 @@ function App() {
         <Route path="/africa" element={<Africa />} />
         <Route path="/north-america" element={<NorthAmerica />} />
         <Route path="/south-america" element={<SouthAmerica />} />
+        <Route path="/world-capital-quiz" element={<WorldCapitals />} />
+        <Route path="/world-countries-quiz" element={<WorldCountries />} />
+        <Route path="/world-flag-quiz" element={<WorldFlags />} />
+
+
+
       </Route>
     )
   );
