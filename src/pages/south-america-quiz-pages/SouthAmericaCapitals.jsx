@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import SouthAmericaMap from '../../components/SouthAmericaMap';
+import SouthAmericaMap from '../../components/SouthAmericaMapLow';
 
 function SouthAmericaCapitals() {
     const [countries, setCountries] = useState([]);
@@ -125,7 +125,7 @@ function SouthAmericaCapitals() {
         </div>
   
         <div className="map-container" onClick={clickHandler}>
-          <SouthAmericaCapitals
+          <SouthAmericaMap
             guessedCountries={guessedCountries}
             getCountryColor={getCountryColor}
           />

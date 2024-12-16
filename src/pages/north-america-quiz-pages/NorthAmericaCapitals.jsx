@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import NorthAmericaMap from "../../components/NorthAmericaMap";
+import NorthAmericaMap from "../../components/NorthAmericaMapLow";
 
 function NorthAmericaCapitals() {
   const [countries, setCountries] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import EuropaMap from "../../components/EuropaMap";
+import EuropaMap from "../../components/EuropaMapLow";
 
 function EuropeCountries() {
   const [countries, setCountries] = useState([]);
@@ -107,14 +107,15 @@ function EuropeCountries() {
   // color based on the number of tries
   const getCountryColor = (countryCode) => {
     const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
-    if (!guessedCountry) return "#c0c0c0"; // Default color
-
+    if (!guessedCountry) return "country-default"; 
+  
     const { attempts } = guessedCountry;
-    if (attempts === 1) return "#4caf50";
-    if (attempts === 2) return "#ffeb3b";
-    if (attempts === 3) return "#ffc107";
-    return "#f44336";
+    if (attempts === 1) return "country-green";
+    if (attempts === 2) return "country-yellow";
+    if (attempts === 3) return "country-redyellow";
+    return "country-red";
   };
+  
 
   return (
     <div className="quiz-container">

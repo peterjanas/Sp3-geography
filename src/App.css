@@ -1,17 +1,36 @@
-path {
-  /* for svg paths */
+.land,
+.marker {
+  fill: #f5f5f5;
   stroke: black;
   stroke-width: 1;
-  cursor: pointer;
-  transition: fill 0.2s ease;
+  transition: fill 0.2s ease-in-out;
 }
 
-circle {
-  /* circles for small countries */
-  stroke: black;
-  stroke-width: 1;
+.land:hover,
+.marker:hover {
+  fill: #a9a9a9;
   cursor: pointer;
-  transition: fill 0.2s ease;
+}
+.filler_country {
+  fill: #808080;
+  stroke: black;
+  stroke-width: 1
+}
+
+.country-green {
+  fill: #4caf50;
+}
+
+.country-yellow {
+  fill: #ffeb3b;
+}
+
+.country-redyellow {
+  fill: #ffc107;
+}
+
+.country-red {
+  fill: #f44336;
 }
 
 .quiz-container {
@@ -27,6 +46,16 @@ circle {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.quiz-controls button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
 }
 
 .quiz-controls button:disabled {
@@ -34,13 +63,13 @@ circle {
   cursor: not-allowed;
 }
 
-/* Map container */
 .map-container {
-  border: 2px solid black; /* Black border */
-  border-radius: 8px; /* Rounded corners */
-  background-color: #87ceeb; /* Water background */
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: #87ceeb;
   width: 80%;
   max-width: 900px;
-  margin: 0 auto; /* Center horizontally */
+  margin: 0 auto;
   overflow: hidden;
 }
+
