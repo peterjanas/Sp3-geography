@@ -1,9 +1,12 @@
 function NorthAmericaMap({ guessedCountries, getCountryColor }) {
   return (
-    <svg 
-    width="auto" 
-    height="400px" 
-    viewBox="-50 175 500 300"
+    <svg
+      viewBox="
+      1.154000163078308
+      11.726929664611816 
+      326.7667541503906 
+      430.76397705078125" 
+      style={{ width: "100%", height: "auto", display: "block" }}
     >
       
       <path

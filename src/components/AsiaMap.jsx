@@ -1,10 +1,12 @@
 function AsiaMap({ guessedCountries, getCountryColor }) {
   return (
     <svg
-      width="auto"
-      height="400px"
-      transform="scale(1.1)"
-      viewBox="500 200 600 300"
+      viewBox="
+      571.6799926757812
+      38.8900032043457 
+      438.59002685546875 
+      482.239990234375" 
+      style={{ width: "100%", height: "auto", display: "block" }}
     >
       <path
         id="RU"
