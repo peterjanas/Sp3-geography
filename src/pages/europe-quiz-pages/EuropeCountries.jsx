@@ -14,7 +14,7 @@ function EuropeCountries() {
       .then((response) => response.json())
       .then((data) => {
         const countryList = data
-          .filter((country) => country.independent === true || country.independent === null)
+          .filter((country) => country.independent === true || country.independent === null) // null is because Kosovo is weird
           .map((country) => ({
             name: country.name.common,
             cca2: country.cca2.toLowerCase(),
