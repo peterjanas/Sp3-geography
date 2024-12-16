@@ -97,16 +97,17 @@ function SouthAmericaCapitals() {
       }
     };
   
-    const getCountryColor = (countryCode) => {
-      const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
-      if (!guessedCountry) return "#c0c0c0"; // Default color
+    // color based on the number of tries
+  const getCountryColor = (countryCode) => {
+    const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
+    if (!guessedCountry) return "country-default"; 
   
-      const { attempts } = guessedCountry;
-      if (attempts === 1) return "#4caf50"; // Green
-      if (attempts === 2) return "#ffeb3b"; // Yellow
-      if (attempts === 3) return "#ffc107"; // Red-yellow
-      return "#f44336"; // Red
-    };
+    const { attempts } = guessedCountry;
+    if (attempts === 1) return "country-green";
+    if (attempts === 2) return "country-yellow";
+    if (attempts === 3) return "country-redyellow";
+    return "country-red";
+  };
   
     return (
       <div className="quiz-container">
