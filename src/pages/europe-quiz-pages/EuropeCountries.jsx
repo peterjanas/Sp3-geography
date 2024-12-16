@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import EuropaMap from "../../components/EuropaMapLow";
+import EuropaMap from "../../components/EuropaMap";
 
 function EuropeCountries() {
   const [countries, setCountries] = useState([]);
@@ -17,7 +17,7 @@ function EuropeCountries() {
           .filter(
             (country) =>
               country.independent === true || country.independent === null
-          ) // null is because Kosovo is weird
+          ) // null for Kosovo
           .map((country) => ({
             name: country.name.common,
             cca2: country.cca2.toLowerCase(),
@@ -107,15 +107,35 @@ function EuropeCountries() {
   // color based on the number of tries
   const getCountryColor = (countryCode) => {
     const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
-    if (!guessedCountry) return "country-default"; 
-  
+    if (!guessedCountry) return "country-default";
+
     const { attempts } = guessedCountry;
     if (attempts === 1) return "country-green";
     if (attempts === 2) return "country-yellow";
     if (attempts === 3) return "country-redyellow";
     return "country-red";
   };
-  
+
+  const handleHoverEffect = (event) => {
+    const element = event.target;
+
+    if (
+      element.classList.contains("land") ||
+      element.classList.contains("marker")
+    ) {
+      const countryCode = element.id.replace("-marker", "").toLowerCase();
+
+      // Check if the country is guessed
+      const isGuessed = guessedCountries.some((g) => g.cca2 === countryCode);
+
+      // Dynamically toggle hover effects
+      if (isGuessed) {
+        element.classList.remove("hoverable");
+      } else {
+        element.classList.add("hoverable");
+      }
+    }
+  };
 
   return (
     <div className="quiz-container">
@@ -132,7 +152,11 @@ function EuropeCountries() {
         )}
       </div>
 
-      <div className="map-container" onClick={clickHandler}>
+      <div
+        className="map-container"
+        onMouseOver={handleHoverEffect}
+        onClick={clickHandler}
+      >
         <EuropaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

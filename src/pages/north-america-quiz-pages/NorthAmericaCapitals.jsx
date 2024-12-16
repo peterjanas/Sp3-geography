@@ -114,6 +114,27 @@ function NorthAmericaCapitals() {
     return "country-red";
   };
 
+  const handleHoverEffect = (event) => {
+    const element = event.target;
+
+    if (
+      element.classList.contains("land") ||
+      element.classList.contains("marker")
+    ) {
+      const countryCode = element.id.replace("-marker", "").toLowerCase();
+
+      // Check if the country is guessed
+      const isGuessed = guessedCountries.some((g) => g.cca2 === countryCode);
+
+      // Dynamically toggle hover effects
+      if (isGuessed) {
+        element.classList.remove("hoverable");
+      } else {
+        element.classList.add("hoverable");
+      }
+    }
+  };
+
   return (
     <div className="quiz-container">
       <h1>North American Capitals Quiz</h1>
@@ -130,7 +151,11 @@ function NorthAmericaCapitals() {
         )}
       </div>
 
-      <div className="map-container" onClick={clickHandler}>
+      <div
+        className="map-container"
+        onMouseOver={handleHoverEffect}
+        onClick={clickHandler}
+      >
         <NorthAmericaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import SouthAmericaMap from '../../components/SouthAmericaMapLow';
+import SouthAmericaMap from "../../components/SouthAmericaMapLow";
 
 function SouthAmericaCountries() {
-    const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [quizActive, setQuizActive] = useState(false);
   const [guessedCountries, setGuessedCountries] = useState([]);
@@ -14,7 +14,10 @@ function SouthAmericaCountries() {
       .then((response) => response.json())
       .then((data) => {
         const countryList = data
-          .filter((country) => country.independent === true || country.independent === null)
+          .filter(
+            (country) =>
+              country.independent === true || country.independent === null
+          )
           .map((country) => ({
             name: country.name.common,
             cca2: country.cca2.toLowerCase(),
@@ -25,7 +28,6 @@ function SouthAmericaCountries() {
         console.error("Error fetching country data:", error);
       });
   }, []);
-  
 
   // To prevent it drawing the same country twice as useState is async
   useEffect(() => {
@@ -46,22 +48,25 @@ function SouthAmericaCountries() {
       return;
     }
     const randomCountry =
-      remainingCountries[
-        Math.floor(Math.random() * remainingCountries.length)
-      ];
+      remainingCountries[Math.floor(Math.random() * remainingCountries.length)];
     setCurrentCountry(randomCountry);
     setQuizActive(true);
   };
 
   const clickHandler = (event) => {
     const clickedElement = event.target;
-  
+
     if (quizActive) {
-      const countryCode = clickedElement.id.toLowerCase().replace("-marker", "");
-  
-      if (clickedElement.tagName === "path" || clickedElement.tagName === "circle") {
+      const countryCode = clickedElement.id
+        .toLowerCase()
+        .replace("-marker", "");
+
+      if (
+        clickedElement.tagName === "path" ||
+        clickedElement.tagName === "circle"
+      ) {
         const currentAttempts = (guesses[currentCountry.cca2] || 0) + 1; // current attempts
-  
+
         if (countryCode === currentCountry.cca2) {
           // if correct guess
           setGuessedCountries((prev) => [
@@ -69,12 +74,16 @@ function SouthAmericaCountries() {
             { cca2: currentCountry.cca2, attempts: currentAttempts },
           ]);
           setGuesses((prev) => ({ ...prev, [currentCountry.cca2]: 0 })); // Reset attempts for this country
-          alert(`Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`);
+          alert(
+            `Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`
+          );
           setQuizActive(false); // Mark quiz as inactive
           setCurrentCountry(null); // Clear current country to trigger new draw via useEffect
         } else {
           if (currentAttempts === 4) {
-            alert(`The correct answer is ${currentCountry.name}. Moving to the next country.`);
+            alert(
+              `The correct answer is ${currentCountry.name}. Moving to the next country.`
+            );
             setGuessedCountries((prev) => [
               ...prev,
               { cca2: currentCountry.cca2, attempts: currentAttempts },
@@ -94,19 +103,38 @@ function SouthAmericaCountries() {
       }
     }
   };
-  
-  
 
   // color based on the number of tries
   const getCountryColor = (countryCode) => {
     const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
-    if (!guessedCountry) return "country-default"; 
-  
+    if (!guessedCountry) return "country-default";
+
     const { attempts } = guessedCountry;
     if (attempts === 1) return "country-green";
     if (attempts === 2) return "country-yellow";
     if (attempts === 3) return "country-redyellow";
     return "country-red";
+  };
+
+  const handleHoverEffect = (event) => {
+    const element = event.target;
+
+    if (
+      element.classList.contains("land") ||
+      element.classList.contains("marker")
+    ) {
+      const countryCode = element.id.replace("-marker", "").toLowerCase();
+
+      // Check if the country is guessed
+      const isGuessed = guessedCountries.some((g) => g.cca2 === countryCode);
+
+      // Dynamically toggle hover effects
+      if (isGuessed) {
+        element.classList.remove("hoverable");
+      } else {
+        element.classList.add("hoverable");
+      }
+    }
   };
 
   return (
@@ -124,7 +152,11 @@ function SouthAmericaCountries() {
         )}
       </div>
 
-      <div className="map-container" onClick={clickHandler}>
+      <div
+        className="map-container"
+        onMouseOver={handleHoverEffect}
+        onClick={clickHandler}
+      >
         <SouthAmericaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}
