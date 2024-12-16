@@ -110,19 +110,21 @@ function SouthAmericaCountries() {
   };
 
   return (
-    <div>
-      <h1>South America Quiz</h1>
-      <div style={{ position: "relative", zIndex: 10 }}>
+    <div className="quiz-container">
+      <h1>South American countries quiz</h1>
+
+      <div className="quiz-controls">
         <button onClick={drawCountry} disabled={quizActive}>
           {quizActive ? "Guess the Country" : "Start Quiz"}
         </button>
         {currentCountry && (
-          <div>
-            <p>Find the country: {currentCountry.name}</p>
-          </div>
+          <p>
+            Find the country: <strong>{currentCountry.name}</strong>
+          </p>
         )}
       </div>
-      <div style={{ position: "relative", zIndex: 1 }} onClick={clickHandler}>
+
+      <div className="map-container" onClick={clickHandler}>
         <SouthAmericaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

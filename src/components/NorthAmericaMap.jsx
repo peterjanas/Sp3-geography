@@ -1,6 +1,11 @@
 function NorthAmericaMap({ guessedCountries, getCountryColor }) {
   return (
-    <svg width="auto" height="400px" viewBox="-50 175 500 300">
+    <svg 
+    width="auto" 
+    height="400px" 
+    viewBox="-50 175 500 300"
+    >
+      
       <path
         id="AG"
         title="Antigua and Barbuda"

@@ -114,19 +114,22 @@ function AsiaCapitals() {
   };
 
   return (
-    <div>
+    <div className="quiz-container">
       <h1>Asian Capitals Quiz</h1>
-      <div style={{ position: "relative", zIndex: 10 }}>
+
+      <div className="quiz-controls">
         <button onClick={drawCountry} disabled={quizActive}>
           {quizActive ? "Guess the Capital" : "Start Quiz"}
         </button>
         {currentCountry && (
-          <div>
-            <p>Find the country with this capital: {currentCountry.capital}</p>
-          </div>
+          <p>
+            Find the country with this capital:{" "}
+            <strong>{currentCountry.capital} </strong>
+          </p>
         )}
       </div>
-      <div style={{ position: "relative", zIndex: 1 }} onClick={clickHandler}>
+
+      <div className="map-container" onClick={clickHandler}>
         <AsiaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

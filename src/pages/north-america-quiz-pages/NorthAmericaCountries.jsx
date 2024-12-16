@@ -117,19 +117,21 @@ function NorhtAmericaCountries() {
   };
 
   return (
-    <div>
-      <h1>North American Quiz</h1>
-      <div style={{ position: "relative", zIndex: 10 }}>
+    <div className="quiz-container">
+      <h1>North America Quiz</h1>
+
+      <div className="quiz-controls">
         <button onClick={drawCountry} disabled={quizActive}>
           {quizActive ? "Guess the Country" : "Start Quiz"}
         </button>
         {currentCountry && (
-          <div>
-            <p>Find the country: {currentCountry.name}</p>
-          </div>
+          <p>
+            Find the country: <strong>{currentCountry.name}</strong>
+          </p>
         )}
       </div>
-      <div style={{ position: "relative", zIndex: 1 }} onClick={clickHandler}>
+
+      <div className="map-container" onClick={clickHandler}>
         <NorthAmericaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

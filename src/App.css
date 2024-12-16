@@ -1,13 +1,46 @@
 path {
-    stroke: black;
-    stroke-width: 1;
-    cursor: pointer;
-    transition: fill 0.2s ease;
-  }
-  
-  circle {
-    stroke: black;
-    stroke-width: 1;
-    cursor: pointer;
-    transition: fill 0.2s ease;
-  }
+  /* for svg paths */
+  stroke: black;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+
+circle {
+  /* circles for small countries */
+  stroke: black;
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill 0.2s ease;
+}
+
+.quiz-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.quiz-controls {
+  margin-bottom: 20px;
+}
+
+.quiz-controls button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quiz-controls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Map container */
+.map-container {
+  border: 2px solid black; /* Black border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #87ceeb; /* Water background */
+  width: 80%;
+  max-width: 900px;
+  margin: 0 auto; /* Center horizontally */
+  overflow: hidden;
+}
