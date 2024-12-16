@@ -111,7 +111,7 @@ function AfricaCountries() {
 
   return (
     <div>
-      <h1>Africa Quiz</h1>
+      <h1>African Quiz</h1>
       <div style={{ position: "relative", zIndex: 10 }}>
         <button onClick={drawCountry} disabled={quizActive}>
           {quizActive ? "Guess the Country" : "Start Quiz"}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import AsiaMap from '../../components/AsiaMap';
+import AsiaMap from "../../components/AsiaMap";
 
 function AsiaCountries() {
-    const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [quizActive, setQuizActive] = useState(false);
   const [guessedCountries, setGuessedCountries] = useState([]);
@@ -25,7 +25,6 @@ function AsiaCountries() {
         console.error("Error fetching country data:", error);
       });
   }, []);
-  
 
   // To prevent it drawing the same country twice as useState is async
   useEffect(() => {
@@ -46,22 +45,25 @@ function AsiaCountries() {
       return;
     }
     const randomCountry =
-      remainingCountries[
-        Math.floor(Math.random() * remainingCountries.length)
-      ];
+      remainingCountries[Math.floor(Math.random() * remainingCountries.length)];
     setCurrentCountry(randomCountry);
     setQuizActive(true);
   };
 
   const clickHandler = (event) => {
     const clickedElement = event.target;
-  
+
     if (quizActive) {
-      const countryCode = clickedElement.id.toLowerCase().replace("-marker", "");
-  
-      if (clickedElement.tagName === "path" || clickedElement.tagName === "circle") {
+      const countryCode = clickedElement.id
+        .toLowerCase()
+        .replace("-marker", "");
+
+      if (
+        clickedElement.tagName === "path" ||
+        clickedElement.tagName === "circle"
+      ) {
         const currentAttempts = (guesses[currentCountry.cca2] || 0) + 1; // current attempts
-  
+
         if (countryCode === currentCountry.cca2) {
           // if correct guess
           setGuessedCountries((prev) => [
@@ -69,12 +71,16 @@ function AsiaCountries() {
             { cca2: currentCountry.cca2, attempts: currentAttempts },
           ]);
           setGuesses((prev) => ({ ...prev, [currentCountry.cca2]: 0 })); // Reset attempts for this country
-          alert(`Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`);
+          alert(
+            `Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`
+          );
           setQuizActive(false); // Mark quiz as inactive
           setCurrentCountry(null); // Clear current country to trigger new draw via useEffect
         } else {
           if (currentAttempts === 4) {
-            alert(`The correct answer is ${currentCountry.name}. Moving to the next country.`);
+            alert(
+              `The correct answer is ${currentCountry.name}. Moving to the next country.`
+            );
             setGuessedCountries((prev) => [
               ...prev,
               { cca2: currentCountry.cca2, attempts: currentAttempts },
@@ -94,8 +100,6 @@ function AsiaCountries() {
       }
     }
   };
-  
-  
 
   // color based on the number of tries
   const getCountryColor = (countryCode) => {
@@ -111,7 +115,7 @@ function AsiaCountries() {
 
   return (
     <div>
-      <h1>Asia Quiz</h1>
+      <h1>Asian Quiz</h1>
       <div style={{ position: "relative", zIndex: 10 }}>
         <button onClick={drawCountry} disabled={quizActive}>
           {quizActive ? "Guess the Country" : "Start Quiz"}

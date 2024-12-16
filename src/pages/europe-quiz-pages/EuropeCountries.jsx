@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
-import EuropaMapTest from '../../components/EuropaMap';
+import EuropaMap from "../../components/EuropaMap";
 
 function EuropeCountries() {
   const [countries, setCountries] = useState([]);
@@ -14,7 +14,10 @@ function EuropeCountries() {
       .then((response) => response.json())
       .then((data) => {
         const countryList = data
-          .filter((country) => country.independent === true || country.independent === null) // null is because Kosovo is weird
+          .filter(
+            (country) =>
+              country.independent === true || country.independent === null
+          ) // null is because Kosovo is weird
           .map((country) => ({
             name: country.name.common,
             cca2: country.cca2.toLowerCase(),
@@ -25,7 +28,6 @@ function EuropeCountries() {
         console.error("Error fetching country data:", error);
       });
   }, []);
-  
 
   // To prevent it drawing the same country twice as useState is async
   useEffect(() => {
@@ -46,22 +48,25 @@ function EuropeCountries() {
       return;
     }
     const randomCountry =
-      remainingCountries[
-        Math.floor(Math.random() * remainingCountries.length)
-      ];
+      remainingCountries[Math.floor(Math.random() * remainingCountries.length)];
     setCurrentCountry(randomCountry);
     setQuizActive(true);
   };
 
   const clickHandler = (event) => {
     const clickedElement = event.target;
-  
+
     if (quizActive) {
-      const countryCode = clickedElement.id.toLowerCase().replace("-marker", "");
-  
-      if (clickedElement.tagName === "path" || clickedElement.tagName === "circle") {
+      const countryCode = clickedElement.id
+        .toLowerCase()
+        .replace("-marker", "");
+
+      if (
+        clickedElement.tagName === "path" ||
+        clickedElement.tagName === "circle"
+      ) {
         const currentAttempts = (guesses[currentCountry.cca2] || 0) + 1; // current attempts
-  
+
         if (countryCode === currentCountry.cca2) {
           // if correct guess
           setGuessedCountries((prev) => [
@@ -69,12 +74,16 @@ function EuropeCountries() {
             { cca2: currentCountry.cca2, attempts: currentAttempts },
           ]);
           setGuesses((prev) => ({ ...prev, [currentCountry.cca2]: 0 })); // Reset attempts for this country
-          alert(`Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`);
+          alert(
+            `Correct! You got ${currentCountry.name} in ${currentAttempts} attempt(s).`
+          );
           setQuizActive(false); // Mark quiz as inactive
           setCurrentCountry(null); // Clear current country to trigger new draw via useEffect
         } else {
           if (currentAttempts === 4) {
-            alert(`The correct answer is ${currentCountry.name}. Moving to the next country.`);
+            alert(
+              `The correct answer is ${currentCountry.name}. Moving to the next country.`
+            );
             setGuessedCountries((prev) => [
               ...prev,
               { cca2: currentCountry.cca2, attempts: currentAttempts },
@@ -94,8 +103,6 @@ function EuropeCountries() {
       }
     }
   };
-  
-  
 
   // color based on the number of tries
   const getCountryColor = (countryCode) => {
@@ -123,7 +130,7 @@ function EuropeCountries() {
         )}
       </div>
       <div style={{ position: "relative", zIndex: 1 }} onClick={clickHandler}>
-        <EuropaMapTest
+        <EuropaMap
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}
         />
