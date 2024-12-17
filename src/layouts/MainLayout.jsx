@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const StyledHeader = styled.header`
-  background-color: rgba(31, 120, 37, 0.68);
+  background-color: rgb(0, 0, 0);
   color: #ffffff;
   padding: 0.5rem 1rem; /* Reducér header-størrelse */
   display: flex;
@@ -25,7 +25,12 @@ const StyledHeader = styled.header`
 const Nav = styled.nav`
   ul {
     display: flex; /* Gør links horisontale */
+    flex-wrap: wrap; /* Tillad menupunkterne at bryde til næste linje */
     list-style: none; /* Fjern punkttegn */
+
+    @media (max-width: 768px) {
+      justify-content: center; /* Centrer menupunkterne på små skærme */
+    }
   }
 
   li {
@@ -35,7 +40,7 @@ const Nav = styled.nav`
   a {
     text-decoration: none; /* Fjern understregning */
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 
     &:hover {
       text-decoration: underline; /* Understreg ved hover */
@@ -44,17 +49,25 @@ const Nav = styled.nav`
 `;
 
 const StyledFooter = styled.footer`
-  background-color: rgba(31, 120, 37, 0.68);
+  background-color: rgb(0, 0, 0);
   color: #ffffff;
   text-align: center;
   margin-top: auto;
-  
+`;
+
+const Logo = styled.img`
+  height: 7rem;
+  cursor: pointer;
 `;
 
 function MainLayout() {
   return (
-<>     <StyledHeader>
-        <h1>Logo her</h1> {/* Mindre font-size */}
+    <>
+      {" "}
+      <StyledHeader>
+        <NavLink to="/">
+          <Logo src="/Atlaslogoblackcopy.png" alt="Atlas Logo" />
+        </NavLink>
         <Nav>
           <ul>
             <li>
@@ -82,10 +95,11 @@ function MainLayout() {
         </Nav>
       </StyledHeader>
       <Outlet />
-
       <StyledFooter>
-      <p>© {new Date().getFullYear()} Atlas Quiz.</p>      </StyledFooter>
-      </>   );
+        <p>© {new Date().getFullYear()} Atlas Quiz.</p>{" "}
+      </StyledFooter>
+    </>
+  );
 }
 
 export default MainLayout;
