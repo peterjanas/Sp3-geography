@@ -59,7 +59,14 @@ const StyledFooter = styled.footer`
 const Logo = styled.img`
   height: 7rem;
   cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth hover effect */
+
+  &:hover {
+    transform: scale(1.1); /* Slightly increase size */
+    opacity: 0.8; /* Slightly reduce opacity */
+  }
 `;
+
 
 function MainLayout() {
   return (
