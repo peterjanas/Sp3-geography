@@ -1,4 +1,4 @@
-function AfricaMapLow({ guessedCountries, getCountryColor, onMouseOver }) {
+function AfricaMapLow({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="

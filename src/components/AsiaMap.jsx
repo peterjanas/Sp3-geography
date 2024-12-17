@@ -1,4 +1,4 @@
-function AsiaMapLow({ guessedCountries, getCountryColor, onMouseOver }) {
+function AsiaMapLow({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="
@@ -322,9 +322,6 @@ function AsiaMapLow({ guessedCountries, getCountryColor, onMouseOver }) {
         className={`marker ${getCountryColor("mv")}`}
       />
     </svg>
-
-    /* TODO: 
-    mangler på map georgia, azerbajian, amenmia, turkey eller skal fjern fra api  */
   );
 }
 

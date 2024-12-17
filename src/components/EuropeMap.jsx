@@ -1,4 +1,4 @@
-function EuropeMap({ guessedCountries, getCountryColor, onMouseOver }) {
+function EuropeMap({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="
