@@ -1,23 +1,27 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+import WorldLogo from "../assets/world.png";
+import CapitalLogo from "../assets/capital.png";
 
 function QuizOverview(props) {
   const cardStyle = {
     display: "inline-block",
     marginRight: "1rem",
+    marginTop: "-4rem",
     padding: "2rem",
     textDecoration: "none",
-    color: "#333",
-    backgroundColor: "#f9f9f9",
+    color: "white",
+    backgroundColor: "black",
     border: "2px solid #ddd",
     borderRadius: "8px",
     maxWidth: "100px",
     transition: "all 0.3s ease",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    boxShadow: "5px 5px 5px black",
+    textShadow: "2px 2px 2px blue",
   };
 
   const hoverStyle = {
-    backgroundColor: "#e6f7ff",
+    backgroundColor: "#333",
     cursor: "pointer",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   };
@@ -29,14 +33,13 @@ function QuizOverview(props) {
     display: "block",
     margin: "0 auto",
     marginBottom: "10px",
+    borderRadius: "50%",
   };
 
   const [hovered, setHovered] = useState(null);
 
   return (
     <div style={{ textAlign: "center", padding: "2rem" }}>
-      <h1>Quiz Overview</h1>
-
       <NavLink
         to={props.capitalPath}
         style={{
@@ -46,7 +49,7 @@ function QuizOverview(props) {
         onMouseEnter={() => setHovered("capital")}
         onMouseLeave={() => setHovered(null)}
       >
-        <img src="capitalicon.jpg" alt="capital icon" style={imageStyle} />
+        <img src={CapitalLogo} alt="capital icon" style={imageStyle} />
         {props.continent} Capital Quiz
       </NavLink>
 
@@ -59,7 +62,7 @@ function QuizOverview(props) {
         onMouseEnter={() => setHovered("country")}
         onMouseLeave={() => setHovered(null)}
       >
-        <img src="tempimg.png" alt="country icon" style={imageStyle} />
+        <img src={WorldLogo} alt="country icon" style={imageStyle} />
         {props.continent} Country Quiz
       </NavLink>
 
