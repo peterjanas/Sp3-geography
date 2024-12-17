@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const AtlasUrl = "https://atlasapi.cphmk.dk/api/countries";
+const AtlasUrl = "https://atlasapi.cphmk.dk/api/countries/region/americas";
 
 const Container = styled.div`
   text-align: center;

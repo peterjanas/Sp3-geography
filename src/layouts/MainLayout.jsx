@@ -53,6 +53,7 @@ const StyledFooter = styled.footer`
   color: #ffffff;
   text-align: center;
   margin-top: auto;
+  padding: 0.1px;
 `;
 
 const Logo = styled.img`
