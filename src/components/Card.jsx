@@ -1,5 +1,5 @@
-import continentPic from "../assets/geo.png";
 import React, { useState } from "react";
+import WorldLogo from "../assets/world.png";
 
 function Card(props) {
   const [isHovered, setIsHovered] = useState(false);
@@ -52,7 +52,7 @@ function Card(props) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img style={imgStyle} src={continentPic} alt="continent pic" />
+      <img style={imgStyle} src={WorldLogo} alt="continent pic" />
       <h2 style={titleStyle}>{props.title}</h2>
       <p style={descriptionStyle}>{props.description}</p>
     </div>
