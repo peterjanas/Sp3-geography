@@ -32,7 +32,7 @@ function Africa() {
   }, [fullText]);
 
   const textStyle = {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Comic Sans MS', 'Comic Sans', cursive",
     fontSize: "1.2rem",
     lineHeight: "1.8",
     color: "#333",
@@ -43,7 +43,7 @@ function Africa() {
   };
 
   const title = {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Comic Sans MS', 'Comic Sans', cursive",
     fontSize: "3.5rem",
     fontWeight: "bold",
     letterSpacing: "0.1rem",
@@ -95,7 +95,7 @@ function Africa() {
   return (
     <div style={parentStyle}>
       <div style={leftStyle}>
-        <h2>Fun facts:</h2>
+        <h2 className="fun-facts">Fun facts:</h2>
         <h2 style={textStyle}>{text}</h2>
       </div>
       <div style={centerStyle}>

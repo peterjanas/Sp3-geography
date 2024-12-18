@@ -81,3 +81,61 @@
   overflow: hidden;
 }
 
+.fun-facts {
+  font-family: 'Caveat', cursive; /* Quirky and handwritten feel */
+  font-size: 2.8rem; /* Original size retained */
+  color: white;
+  text-align: center;
+  position: relative;
+  margin-top: 10px; /* Moves it closer to the top */
+  padding: 5px;
+  display: inline-block;
+  background: linear-gradient(90deg, white, gray);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  animation: bounce 2s infinite;
+  letter-spacing: 3px;
+  text-transform: capitalize;
+}
+
+.fun-facts::after {
+  content: "";
+  position: absolute;
+  left: 23%; /* Position it relative to the center of the text */
+  transform: translateX(-50%); /* Correct for the element's own width */
+  bottom: -10px; /* Distance from the text */
+  width: 50%; /* Set the underline width (adjust as needed) */
+  height: 3px; /* Thickness of the underline */
+  background: linear-gradient(to right, white, gray, white);
+  border-radius: 10px;
+  animation: wave 3s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px); /* Keeps original bounce */
+  }
+}
+
+@keyframes wave {
+  0% {
+      transform: scaleX(1);
+  }
+  50% {
+      transform: scaleX(1.5);
+  }
+  100% {
+      transform: scaleX(1);
+  }
+}
+
+.fun-facts:hover {
+  text-shadow: 3px 3px 10px white, -3px -3px 10px gray;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
