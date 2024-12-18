@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
+import HomeIcon from "../SvgComponents/HomeIcon";
 
 const Container = styled.div`
   flex-direction: column;
@@ -79,7 +80,7 @@ function MainLayout() {
         <Nav>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/">{HomeIcon}</NavLink>
             </li>
             <li>
               <NavLink to="/world">World</NavLink>
