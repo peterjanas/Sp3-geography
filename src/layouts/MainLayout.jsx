@@ -16,6 +16,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   z-index: 1000;
+  margin-bottom: 12px;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -53,7 +54,7 @@ const StyledFooter = styled.footer`
   background-color: rgb(0, 0, 0);
   color: #ffffff;
   text-align: center;
-  margin-top: auto;
+  margin-top: 15px;
   padding: 0.1px;
 `;
 
@@ -67,7 +68,6 @@ const Logo = styled.img`
     opacity: 0.8; /* Slightly reduce opacity */
   }
 `;
-
 
 function MainLayout() {
   return (
