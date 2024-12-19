@@ -1,5 +1,5 @@
 import React from "react";
-import WorldMap from "../../components/WorldMap.jsx";
+import WorldMap from "../../components/WorldMap"
 import CountryAndCapitalQuiz from "../../components/CountryAndCapitalQuiz";
 
 function WorldCountries() {

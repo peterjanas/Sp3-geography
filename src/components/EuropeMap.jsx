@@ -7,6 +7,7 @@ function EuropeMap({ getCountryColor, onMouseOver }) {
       470.0000610351562 
       455.4999694824219"
       style={{ width: "100%", height: "auto", display: "block" }}
+      
       onMouseOver={onMouseOver}
       className="europa-map"
     >

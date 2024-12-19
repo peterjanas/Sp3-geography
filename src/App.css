@@ -22,7 +22,7 @@
 .filler_country {
   fill: #808080;
   stroke: black;
-  stroke-width: 1
+  stroke-width: 1;
 }
 
 .country-green {
@@ -75,14 +75,12 @@
   border: 2px solid black;
   border-radius: 8px;
   background-color: #87ceeb;
-  width: 80%;
-  max-width: 900px;
+  width: 85%;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 .fun-facts {
-  font-family: 'Caveat', cursive; /* Quirky and handwritten feel */
+  font-family: "Caveat", cursive; /* Quirky and handwritten feel */
   font-size: 2.8rem; /* Original size retained */
   color: white;
   text-align: center;
@@ -113,23 +111,24 @@
 }
 
 @keyframes bounce {
-  0%, 100% {
-      transform: translateY(0);
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-      transform: translateY(-10px); /* Keeps original bounce */
+    transform: translateY(-10px); /* Keeps original bounce */
   }
 }
 
 @keyframes wave {
   0% {
-      transform: scaleX(1);
+    transform: scaleX(1);
   }
   50% {
-      transform: scaleX(1.5);
+    transform: scaleX(1.5);
   }
   100% {
-      transform: scaleX(1);
+    transform: scaleX(1);
   }
 }
 
@@ -138,4 +137,3 @@
   transform: scale(1.1);
   cursor: pointer;
 }
-
