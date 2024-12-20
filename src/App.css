@@ -79,6 +79,26 @@
   margin: 0 auto;
 }
 
+@keyframes shrinkCircle {
+  0% {
+    r: 100; /* Starting radius */
+    opacity: 1;
+  }
+  100% {
+    r: 0; /* Shrink to 0 */
+    opacity: 0;
+  }
+}
+
+.reveal-circle {
+  fill: none; /* No fill for the circle */
+  stroke: purple; /* Red stroke for visibility */
+  stroke-width: 3;
+  animation: shrinkCircle 1.5s ease-out forwards; /* 1.5 seconds animation */
+}
+
+
+
 
 .fun-facts {
   font-family: "Caveat", cursive; /* Quirky and handwritten feel */

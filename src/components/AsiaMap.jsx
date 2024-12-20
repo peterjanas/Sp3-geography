@@ -1,4 +1,4 @@
-function AsiaMapLow({ getCountryColor, onMouseOver }) {
+function AsiaMapLow({ getCountryColor, onMouseOver}) {
   return (
     <svg
       viewBox="

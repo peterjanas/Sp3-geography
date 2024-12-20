@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import AnimatedCircle from "../SvgComponents/AnimatedCircle";
 
 function Quiz({
   regionApiUrl,
@@ -17,6 +18,8 @@ function Quiz({
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [revealedCountries, setRevealedCountries] = useState([]);
+  const [animatedCountry, setAnimatedCountry] = useState(null);
 
   // sizing for the different maps
   const mapStyles = {
@@ -27,6 +30,7 @@ function Quiz({
     northamerica: { width: "75%", maxWidth: "800px" },
     southamerica: { width: "70%", maxWidth: "800px" },
   };
+  
 
   // Fetch country data based on the API URL and quizType
   useEffect(() => {
@@ -127,7 +131,8 @@ function Quiz({
           ...prevGuessedCountries,
           { cca2: currentCountry.cca2, attempts: currentAttempts },
         ]);
-
+        setRevealedCountries((prev) => [...prev, currentCountry.cca2]); // Add to revealed countries
+        setAnimatedCountry(currentCountry.cca2); // Trigger animation
         setGuesses((prev) => ({ ...prev, [currentCountry.cca2]: 0 }));
         setMessage(
           `The correct answer was ${
@@ -137,7 +142,10 @@ function Quiz({
           }.`
         );
         setQuizActive(false);
-        setTimeout(() => drawCountry(), 300);
+        setTimeout(() => {
+          setAnimatedCountry(null); // Clear animation
+          drawCountry();
+        }, 800); // Match animation duration
       } else {
         // Incorrect guess
         setGuesses((prev) => ({
@@ -159,7 +167,8 @@ function Quiz({
   };
 
   const getCountryColor = (countryCode) => {
-    if (temporaryColors[countryCode]) return "country-red";
+    if (temporaryColors[countryCode]) return "country-red"; //turns wrong guessed country red for a sec
+    if (revealedCountries.includes(countryCode)) return "country-red"; // Highlight revealed country
     const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
     if (!guessedCountry) return "country-default";
     const { attempts } = guessedCountry;
@@ -256,9 +265,14 @@ function Quiz({
       >
         <MapComponent
           guessedCountries={guessedCountries}
-          getCountryColor={getCountryColor}
           onMouseOver={handleHoverEffect}
+          getCountryColor={(countryCode) =>
+            revealedCountries.includes(countryCode)
+              ? "country-red"
+              : "country-default"
+          }
         />
+        {animatedCountry && <AnimatedCircle countryCode={animatedCountry} />}
       </div>
     </div>
   );
