@@ -8,12 +8,12 @@ function Quiz({
   title,
   mapType,
 }) {
-
   const [countries, setCountries] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [quizActive, setQuizActive] = useState(false);
   const [guessedCountries, setGuessedCountries] = useState([]);
   const [guesses, setGuesses] = useState({});
+  const [temporaryColors, setTemporaryColors] = useState({});
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -145,11 +145,21 @@ function Quiz({
           [currentCountry.cca2]: currentAttempts,
         }));
         setMessage(`Wrong! Try again. Attempt ${currentAttempts}/4.`);
+        // Temporarily change color after wrong guess
+        setTemporaryColors((prev) => ({ ...prev, [countryCode]: true }));
+        setTimeout(() => {
+          setTemporaryColors((prev) => {
+            const updated = { ...prev };
+            delete updated[countryCode];
+            return updated;
+          });
+        }, 1000); // Reset color after 500ms
       }
     }
   };
 
   const getCountryColor = (countryCode) => {
+    if (temporaryColors[countryCode]) return "country-red";
     const guessedCountry = guessedCountries.find((g) => g.cca2 === countryCode);
     if (!guessedCountry) return "country-default";
     const { attempts } = guessedCountry;
