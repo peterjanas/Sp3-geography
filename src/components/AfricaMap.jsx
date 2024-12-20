@@ -2,10 +2,10 @@ function AfricaMapLow({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="
-      404.5790100097656
-      345.2070007324219 
-      238.31301879882812 
-      226.08840942382812"
+      410.5790100097656
+      350.2070007324219 
+      220.31301879882812 
+      217.08840942382812"
       style={{ width: "100%", height: "auto", display: "block" }}
       onMouseOver={onMouseOver}
       className="africa-map"
@@ -314,7 +314,7 @@ function AfricaMapLow({ getCountryColor, onMouseOver }) {
       />
       <circle
         id="sc-marker"
-        cx="631.4"
+        cx="620.4"
         cy="475.7"
         r="3"
         className={`marker ${getCountryColor("sc")}`}
@@ -328,14 +328,14 @@ function AfricaMapLow({ getCountryColor, onMouseOver }) {
       />
       <circle
         id="cv-marker"
-        cx="410.0"
+        cx="417.0"
         cy="415.0"
         r="3"
         className={`marker ${getCountryColor("cv")}`}
       />
       <circle
         id="mu-marker"
-        cx="637.5"
+        cx="627.5"
         cy="520.9"
         r="3"
         className={`marker ${getCountryColor("mu")}`}

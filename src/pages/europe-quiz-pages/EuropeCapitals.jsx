@@ -9,6 +9,7 @@ function EuropeCapitals() {
       mapComponent={EuropeMap}
       quizType="capitals"
       title="European Capitals Quiz"
+      mapType="europe"
     />
   );
 }

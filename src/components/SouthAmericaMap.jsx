@@ -2,10 +2,10 @@ function SouthAmericaMap({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="
-      200.46998596191406
+      180.46998596191406
       427.659912109375 
-      185.5901641845703 
-      226.130126953125"
+      250.5901641845703 
+      225.130126953125"
       style={{ width: "100%", height: "auto", display: "block" }}
       onMouseOver={onMouseOver}
       className="southamerica-map"

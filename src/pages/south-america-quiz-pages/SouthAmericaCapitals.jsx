@@ -9,6 +9,7 @@ function SouthAmericaCapitals() {
       mapComponent={SouthAmericaMap}
       quizType="capitals"
       title="South American Capitals Quiz"
+      mapType="southamerica"
     />
   );
 }

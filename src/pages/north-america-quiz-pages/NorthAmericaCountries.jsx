@@ -9,6 +9,7 @@ function NorthAmericaCountries() {
       mapComponent={NorthAmericaMap}
       quizType="countries"
       title="North American Countries Quiz"
+      mapType="northamerica"
     />
   );
 }

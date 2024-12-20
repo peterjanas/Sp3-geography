@@ -9,6 +9,7 @@ function EuropeCountries() {
       mapComponent={EuropeMap}
       quizType="countries"
       title="European Countries Quiz"
+      mapType="europe"
     />
   );
 }

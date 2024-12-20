@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 
-function Quiz({ regionApiUrl, mapComponent: MapComponent, quizType, title }) {
+function Quiz({
+  regionApiUrl,
+  mapComponent: MapComponent,
+  quizType,
+  title,
+  mapType,
+}) {
+
   const [countries, setCountries] = useState([]);
   const [currentCountry, setCurrentCountry] = useState(null);
   const [quizActive, setQuizActive] = useState(false);
@@ -10,6 +17,16 @@ function Quiz({ regionApiUrl, mapComponent: MapComponent, quizType, title }) {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  // sizing for the different maps
+  const mapStyles = {
+    world: { width: "90%", maxWidth: "1600px" },
+    europe: { width: "80%", maxWidth: "900px" },
+    asia: { width: "80%", maxWidth: "1200px" },
+    africa: { width: "80%", maxWidth: "1000px" },
+    northamerica: { width: "75%", maxWidth: "800px" },
+    southamerica: { width: "70%", maxWidth: "800px" },
+  };
 
   // Fetch country data based on the API URL and quizType
   useEffect(() => {
@@ -212,7 +229,7 @@ function Quiz({ regionApiUrl, mapComponent: MapComponent, quizType, title }) {
               top: `${cursorPosition.y}px`,
               left: `${cursorPosition.x + 20}px`,
               pointerEvents: "none",
-              
+
               zIndex: 1000,
             }}
           >
@@ -222,7 +239,11 @@ function Quiz({ regionApiUrl, mapComponent: MapComponent, quizType, title }) {
           </div>
         </>
       )}
-      <div className="map-container" onClick={clickHandler}>
+      <div
+        className="map-container"
+        style={mapStyles[mapType]}
+        onClick={clickHandler}
+      >
         <MapComponent
           guessedCountries={guessedCountries}
           getCountryColor={getCountryColor}

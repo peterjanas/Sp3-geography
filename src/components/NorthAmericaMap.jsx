@@ -2,10 +2,10 @@ function NorthAmericaMap({ getCountryColor, onMouseOver }) {
   return (
     <svg
       viewBox="
-      79.94998931884766
-      168.14999389648438 
-      247.68008422851562 
-      275.07000732421875"
+      120.94998931884766
+      268.14999389648438 
+      167.68008422851562 
+      177.07000732421875"
       style={{ width: "100%", height: "auto", display: "block" }}
       onMouseOver={onMouseOver}
       className="northamerica-map"

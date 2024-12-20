@@ -9,6 +9,7 @@ function AsiaCapitals() {
       mapComponent={AsiaMap}
       quizType="capitals"
       title="Asian Capitals Quiz"
+      mapType="asia"
     />
   );
 }

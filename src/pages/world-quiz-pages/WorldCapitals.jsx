@@ -9,6 +9,7 @@ function WorldCapitals() {
       mapComponent={WorldMap}
       quizType="capitals"
       title="World Capitals Quiz"
+      mapType="world"
     />
   );
 }

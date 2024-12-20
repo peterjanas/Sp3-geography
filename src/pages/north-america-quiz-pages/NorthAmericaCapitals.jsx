@@ -9,6 +9,7 @@ function NorthAmericaCapitals() {
       mapComponent={NorthAmericaMap}
       quizType="capitals"
       title="North American Capitals Quiz"
+      mapType="northamerica"
     />
   );
 }

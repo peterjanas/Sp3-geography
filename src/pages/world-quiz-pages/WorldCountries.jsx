@@ -9,6 +9,7 @@ function WorldCountries() {
       mapComponent={WorldMap}
       quizType="countries"
       title="World Countries Quiz"
+      mapType="world"
     />
   );
 }

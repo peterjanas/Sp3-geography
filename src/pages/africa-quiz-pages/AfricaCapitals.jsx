@@ -9,6 +9,7 @@ function AfricaCapitals() {
       mapComponent={AfricaMap}
       quizType="capitals"
       title="African Capitals Quiz"
+      mapType="africa"
     />
   );
 }
