@@ -56,11 +56,34 @@ function Quiz({
     }
   }, [guessedCountries, quizActive, countries]);
 
+  const resetQuiz = () => {
+    setGuessedCountries([]);
+    setGuesses({});
+    setTemporaryColors({});
+    setMessage("");
+    setCurrentCountry(null);
+    setQuizActive(false);
+  };
+
+  const quitQuiz = () => {
+    setGuessedCountries([]);
+    setGuesses({});
+    setTemporaryColors({});
+    setMessage("You have quit the quiz.");
+    setCurrentCountry(null);
+    setQuizActive(false);
+  };
+
   const drawCountry = () => {
+    if (countries.length === guessedCountries.length) {
+      setMessage("Bravo! You’ve completed the quiz!");
+      setQuizActive(false);
+      return;
+    }
+
     setIsLoading(true);
 
     setTimeout(() => {
-      // Filter remaining countries using the most recent guessedCountries
       setGuessedCountries((latestGuessedCountries) => {
         const remainingCountries = countries.filter(
           (country) =>
@@ -68,9 +91,9 @@ function Quiz({
         );
 
         if (remainingCountries.length === 0) {
-          setMessage("Congratulations! You've guessed all countries!");
           setQuizActive(false);
           setIsLoading(false);
+          setMessage("Bravo! You’ve completed the quiz!");
           return latestGuessedCountries;
         }
 
@@ -108,19 +131,8 @@ function Quiz({
         ]);
 
         setGuesses((prev) => ({ ...prev, [currentCountry.cca2]: 0 }));
-        setMessage(
-          `Correct! ${
-            quizType === "capitals"
-              ? `The capital of ${currentCountry.name} is ${currentCountry.capital}.`
-              : currentCountry.name
-          }`
-        );
-        setQuizActive(false);
-        setTimeout(
-          () =>
-            drawCountry((prevGuessedCountries) => [...prevGuessedCountries]),
-          300
-        );
+        setTimeout(() => setQuizActive(false), 300);
+        setTimeout(() => drawCountry(), 300);
       } else if (currentAttempts >= 4) {
         // Max attempts reached
         setGuessedCountries((prevGuessedCountries) => [
@@ -136,6 +148,7 @@ function Quiz({
               : currentCountry.name
           }.`
         );
+        setTimeout(() => setMessage(""), 2000); // Clear message after 2 seconds
         setQuizActive(false);
         setTimeout(() => drawCountry(), 300);
       } else {
@@ -145,7 +158,7 @@ function Quiz({
           [currentCountry.cca2]: currentAttempts,
         }));
         setMessage(`Wrong! Try again. Attempt ${currentAttempts}/4.`);
-        // Temporarily change color after wrong guess
+        setTimeout(() => setMessage(""), 2000); // Clear message after 2 seconds
         setTemporaryColors((prev) => ({ ...prev, [countryCode]: true }));
         setTimeout(() => {
           setTemporaryColors((prev) => {
@@ -198,57 +211,98 @@ function Quiz({
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    let messageTimeout;
+    if (message) {
+      messageTimeout = setTimeout(() => setMessage(""), 2000);
+    }
+    return () => {
+      if (messageTimeout) clearTimeout(messageTimeout);
+    };
+  }, [message]);
+
   return (
     <div className="quiz-container">
       <h1>{title}</h1>
       <div className="quiz-controls">
         <button
-          onClick={drawCountry}
+          onClick={() => {
+            if (!quizActive && countries.length === guessedCountries.length) {
+              resetQuiz();
+            } else {
+              drawCountry();
+            }
+          }}
           disabled={quizActive || isLoading || countries.length === 0}
         >
           {isLoading
             ? "Loading..."
             : quizActive
             ? "Quiz In Progress..."
+            : countries.length === guessedCountries.length
+            ? "Restart Quiz"
             : "Start Quiz"}
         </button>
 
-        {message && <p className="quiz-message">{message}</p>}
-      </div>
-
-      {currentCountry && (
-        <>
-          <p className="quiz-question">
-            {quizType === "capitals"
-              ? `Find the country with this capital: ${currentCountry.capital}`
-              : `Find this country: ${currentCountry.name}`}
-          </p>
-
-          <div
-            className="quiz-question"
-            style={{
-              position: "fixed",
-              border: "2px solid #4CAF50",
-              borderRadius: "8px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-              background: "linear-gradient(145deg, #f3f3f3, #e0e0e0)",
-              padding: "8px 12px",
-              fontSize: "0.9rem",
-              fontWeight: "bold",
-              color: "#333",
-              top: `${cursorPosition.y}px`,
-              left: `${cursorPosition.x + 20}px`,
-              pointerEvents: "none",
-
-              zIndex: 1000,
-            }}
+        {quizActive && (
+          <button
+            onClick={() => quitQuiz()}
+            disabled={!quizActive}
+            style={{ marginLeft: "10px" }}
           >
-            {quizType === "capitals"
-              ? `Find the country with this capital: ${currentCountry.capital}`
-              : `Find this country: ${currentCountry.name}`}
-          </div>
-        </>
-      )}
+            Quit Quiz
+          </button>
+        )}
+
+        <div className="quiz-message-container">
+          {message && (
+            <p
+              className={`quiz-message ${
+                quizActive ? "quiz-active-message" : "quiz-end-message"
+              }`}
+            >
+              {message}
+            </p>
+          )}
+        </div>
+      </div>
+      {(currentCountry && quizActive) || (!quizActive && message) ? (
+        <div
+          className="quiz-question"
+          style={{
+            position: "fixed",
+            border: "2px solid black",
+            borderRadius: "8px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+            background: "linear-gradient(145deg, #f3f3f3, #e0e0e0)",
+            padding: "8px 12px",
+            fontSize: "0.9rem",
+            fontWeight: "bold",
+            color: "#333",
+            top: `${cursorPosition.y}px`,
+            left: `${cursorPosition.x + 20}px`,
+            pointerEvents: "none",
+            zIndex: 1000,
+          }}
+        >
+          {quizActive
+            ? quizType === "capitals"
+              ? `Find the country with this capital: ${
+                  currentCountry.capital
+                } ${
+                  guesses[currentCountry.cca2]
+                    ? `(Attempt ${guesses[currentCountry.cca2]}/4)`
+                    : "(First Attempt)"
+                }`
+              : `Find this country: ${currentCountry.name} ${
+                  guesses[currentCountry.cca2]
+                    ? `(Attempt ${guesses[currentCountry.cca2]}/4)`
+                    : "(First Attempt)"
+                }`
+            : message}
+        </div>
+      ) : null}
+
       <div
         className="map-container"
         style={mapStyles[mapType]}

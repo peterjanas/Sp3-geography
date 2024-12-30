@@ -62,9 +62,23 @@
 }
 
 .quiz-controls button:hover {
-  background-color: #45a049;
+  background: linear-gradient(90deg, rgba(0, 29, 122, 1), rgba(0, 122, 255, 1), rgba(0, 29, 122, 1));
+  background-size: 200%;
+  animation: shine 1.5s infinite linear;
   transform: scale(1.05);
+  color: white; /* Optional: to make text more visible */
+  border: none;
 }
+
+@keyframes shine {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
 
 .quiz-controls button:disabled {
   background-color: #cccccc;
